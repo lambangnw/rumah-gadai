@@ -43,6 +43,20 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
+| Bind Config Service
+|--------------------------------------------------------------------------
+|
+| Explicitly bind the config service to prevent "Target class [config] 
+| does not exist" errors in serverless environments like Vercel.
+|
+*/
+
+$app->singleton('config', function ($app) {
+    return new Illuminate\Config\Repository();
+});
+
+/*
+|--------------------------------------------------------------------------
 | Return The Application
 |--------------------------------------------------------------------------
 |
