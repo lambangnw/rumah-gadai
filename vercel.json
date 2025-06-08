@@ -47,6 +47,7 @@
     "VIEW_COMPILED_PATH": "/tmp/views",
     "APP_STORAGE_PATH": "/tmp/storage",
     "CACHE_PATH": "/tmp/cache",
+    "LOG_PATH": "/tmp/logs",
     "SESSION_LIFETIME": "120",
     "VERCEL_FORCE_NO_BUILD_CACHE": "1"
   },
