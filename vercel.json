@@ -30,7 +30,7 @@
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "APP_URL": "https://your-app.vercel.app",
+    "APP_URL": "http://rumah-gadai-fix.vercel.app",
     "APP_KEY": "base64:J4qL/tQdsizE1eIm/Lm1OzJgaXdK0tMBy0Q55NAGIKA=",
     "LOG_CHANNEL": "stderr",
     "LOG_LEVEL": "error",
