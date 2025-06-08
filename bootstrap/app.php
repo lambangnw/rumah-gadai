@@ -131,6 +131,9 @@ if (isset($_ENV['VERCEL']) || isset($_ENV['APP_STORAGE_PATH'])) {
 if (isset($_ENV['VERCEL']) || isset($_ENV['APP_STORAGE_PATH'])) {
     $app->useStoragePath($_ENV['APP_STORAGE_PATH'] ?? '/tmp/storage');
     
+    // Set bootstrap cache path for Vercel
+    $app->useBootstrapPath('/tmp/bootstrap');
+    
     // Override bootstrap process to skip LoadEnvironmentVariables
     $app->singleton('Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables', function () {
         return new class {

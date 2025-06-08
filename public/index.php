@@ -92,7 +92,8 @@ if (isset($_ENV['VERCEL']) || isset($_ENV['APP_STORAGE_PATH'])) {
         '/tmp/storage/framework/testing',
         '/tmp/storage/framework/views',
         '/tmp/views',
-        '/tmp/cache'
+        '/tmp/cache',
+        '/tmp/bootstrap/cache'
     ];
     
     foreach ($dirs as $dir) {
