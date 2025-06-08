@@ -86,6 +86,9 @@ $app->singleton('config', function ($app) {
 */
 
 if (isset($_ENV['VERCEL']) || isset($_ENV['APP_STORAGE_PATH'])) {
+    // Register essential service providers for Vercel
+    $app->register(Illuminate\Config\ConfigServiceProvider::class);
+    
     // Set the facade application instance
     Illuminate\Support\Facades\Facade::setFacadeApplication($app);
     
