@@ -35,5 +35,6 @@
     "SESSION_DRIVER": "cookie",
     "CACHE_DRIVER": "array",
     "QUEUE_CONNECTION": "sync"
-  }
+  },
+  "outputDirectory": "public"
 }
