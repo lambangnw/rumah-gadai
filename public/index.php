@@ -35,6 +35,46 @@ require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
+| Load Environment Variables for Vercel
+|--------------------------------------------------------------------------
+|
+| In Vercel, environment variables are passed through the runtime.
+| We need to ensure they are available before Laravel bootstrap.
+|
+*/
+
+if (isset($_ENV['VERCEL']) || isset($_ENV['APP_STORAGE_PATH'])) {
+    // Ensure all Vercel environment variables are available
+    $vercelEnvVars = [
+        'APP_ENV' => 'production',
+        'APP_DEBUG' => 'true',
+        'APP_URL' => 'https://rumah-gadai-fix.vercel.app',
+        'LOG_CHANNEL' => 'stderr',
+        'SESSION_DRIVER' => 'cookie',
+        'CACHE_DRIVER' => 'array',
+        'QUEUE_CONNECTION' => 'sync',
+        'DB_CONNECTION' => 'array',
+        'APP_KEY' => 'base64:J4qL/tQdsizE1eIm/Lm1OzJgaXdK0tMBy0Q55NAGIKA=',
+        'LOG_LEVEL' => 'debug',
+        'SESSION_SECURE_COOKIE' => 'true',
+        'VIEW_COMPILED_PATH' => '/tmp/views',
+        'APP_STORAGE_PATH' => '/tmp/storage',
+        'CACHE_PATH' => '/tmp/cache',
+        'LOG_PATH' => '/tmp/logs',
+        'SESSION_LIFETIME' => '120',
+        'VERCEL' => '1'
+    ];
+    
+    foreach ($vercelEnvVars as $key => $value) {
+        if (!isset($_ENV[$key])) {
+            $_ENV[$key] = $value;
+            putenv("$key=$value");
+        }
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
 | Create Required Directories for Vercel
 |--------------------------------------------------------------------------
 |
