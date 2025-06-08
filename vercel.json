@@ -2,7 +2,12 @@
   "version": 2,
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.7.3"
+      "runtime": "vercel-php@0.7.3",
+      "maxDuration": 30
+    },
+    "api/error-handler.php": {
+      "runtime": "vercel-php@0.7.3",
+      "maxDuration": 30
     }
   },
   "routes": [
@@ -24,7 +29,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/api/index.php"
+      "dest": "/api/error-handler.php"
     }
   ],
   "env": {
