@@ -35,7 +35,5 @@
     "SESSION_DRIVER": "cookie",
     "CACHE_DRIVER": "array",
     "QUEUE_CONNECTION": "sync"
-  },
-  "installCommand": "cd api && composer install && cd .. && npm ci",
-  "buildCommand": "npm run build"
+  }
 }
