@@ -57,6 +57,49 @@ $app->singleton('config', function ($app) {
 
 /*
 |--------------------------------------------------------------------------
+| Bootstrap Facades for Vercel
+|--------------------------------------------------------------------------
+|
+| Bootstrap the facade root to prevent "A facade root has not been set"
+| errors in serverless environments.
+|
+*/
+
+if (isset($_ENV['VERCEL']) || isset($_ENV['APP_STORAGE_PATH'])) {
+    // Set the facade application instance
+    Illuminate\Support\Facades\Facade::setFacadeApplication($app);
+    
+    // Bootstrap essential services
+    $app->singleton('view', function ($app) {
+        return new Illuminate\View\Factory(
+            $app['view.engine.resolver'],
+            $app['view.finder'],
+            $app['events']
+        );
+    });
+    
+    $app->singleton('view.finder', function ($app) {
+        return new Illuminate\View\FileViewFinder(
+            $app['files'],
+            [resource_path('views')]
+        );
+    });
+    
+    $app->singleton('view.engine.resolver', function () {
+        return new Illuminate\View\Engines\EngineResolver();
+    });
+    
+    $app->singleton('files', function () {
+        return new Illuminate\Filesystem\Filesystem();
+    });
+    
+    $app->singleton('events', function () {
+        return new Illuminate\Events\Dispatcher();
+    });
+}
+
+/*
+|--------------------------------------------------------------------------
 | Configure Storage Path for Vercel
 |--------------------------------------------------------------------------
 |
