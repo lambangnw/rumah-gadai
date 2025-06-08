@@ -49,6 +49,7 @@
     "CACHE_PATH": "/tmp/cache",
     "LOG_PATH": "/tmp/logs",
     "SESSION_LIFETIME": "120",
+    "VERCEL": "1",
     "VERCEL_FORCE_NO_BUILD_CACHE": "1"
   },
   "outputDirectory": "public"

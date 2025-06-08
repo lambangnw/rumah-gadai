@@ -35,6 +35,35 @@ require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
+| Create Required Directories for Vercel
+|--------------------------------------------------------------------------
+|
+| Create necessary directories in /tmp for Vercel's read-only filesystem.
+| This ensures Laravel can write to required directories.
+|
+*/
+
+if (isset($_ENV['VERCEL']) || isset($_ENV['APP_STORAGE_PATH'])) {
+    $dirs = [
+        '/tmp/storage/logs',
+        '/tmp/storage/app/public',
+        '/tmp/storage/framework/cache/data',
+        '/tmp/storage/framework/sessions',
+        '/tmp/storage/framework/testing',
+        '/tmp/storage/framework/views',
+        '/tmp/views',
+        '/tmp/cache'
+    ];
+    
+    foreach ($dirs as $dir) {
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
 | Run The Application
 |--------------------------------------------------------------------------
 |

@@ -57,6 +57,20 @@ $app->singleton('config', function ($app) {
 
 /*
 |--------------------------------------------------------------------------
+| Configure Storage Path for Vercel
+|--------------------------------------------------------------------------
+|
+| Override the storage path to use /tmp directory in serverless environments
+| like Vercel where the filesystem is read-only except for /tmp.
+|
+*/
+
+if (isset($_ENV['VERCEL']) || isset($_ENV['APP_STORAGE_PATH'])) {
+    $app->useStoragePath($_ENV['APP_STORAGE_PATH'] ?? '/tmp/storage');
+}
+
+/*
+|--------------------------------------------------------------------------
 | Return The Application
 |--------------------------------------------------------------------------
 |
