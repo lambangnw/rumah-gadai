@@ -41,39 +41,7 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-/*
-|--------------------------------------------------------------------------
-| Bind Config Service
-|--------------------------------------------------------------------------
-|
-| Explicitly bind the config service to prevent "Target class [config] 
-| does not exist" errors in serverless environments like Vercel.
-|
-*/
 
-$app->singleton('config', function ($app) {
-    $config = new Illuminate\Config\Repository();
-    
-    // Load essential configuration for Vercel environment
-    $config->set('app.debug', filter_var(env('APP_DEBUG', false), FILTER_VALIDATE_BOOLEAN));
-    $config->set('app.env', env('APP_ENV', 'production'));
-    $config->set('app.key', env('APP_KEY'));
-    $config->set('app.url', env('APP_URL', 'http://localhost'));
-    $config->set('app.name', env('APP_NAME', 'Laravel'));
-    
-    // Logging configuration
-    $config->set('logging.default', env('LOG_CHANNEL', 'stack'));
-    $config->set('logging.channels.stderr', [
-        'driver' => 'monolog',
-        'handler' => Monolog\Handler\StreamHandler::class,
-        'formatter' => env('LOG_STDERR_FORMATTER'),
-        'with' => [
-            'stream' => 'php://stderr',
-        ],
-    ]);
-    
-    return $config;
-});
 
 /*
 |--------------------------------------------------------------------------
