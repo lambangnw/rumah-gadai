@@ -24,6 +24,20 @@ set_exception_handler(function($exception) {
 });
 
 try {
+    // Clear bootstrap cache for Vercel environment
+    $bootstrapCachePath = __DIR__ . '/../bootstrap/cache';
+    if (is_dir($bootstrapCachePath)) {
+        $files = glob($bootstrapCachePath . '/*');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file);
+            }
+        }
+    }
+    
+    // Ensure composer autoloader is loaded
+    require_once __DIR__ . '/../vendor/autoload.php';
+    
     // Forward Vercel requests to Laravel's public/index.php
     require __DIR__ . '/../public/index.php';
 } catch (Exception $e) {
