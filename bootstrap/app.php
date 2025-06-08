@@ -52,7 +52,27 @@ $app->singleton(
 */
 
 $app->singleton('config', function ($app) {
-    return new Illuminate\Config\Repository();
+    $config = new Illuminate\Config\Repository();
+    
+    // Load essential configuration for Vercel environment
+    $config->set('app.debug', filter_var(env('APP_DEBUG', false), FILTER_VALIDATE_BOOLEAN));
+    $config->set('app.env', env('APP_ENV', 'production'));
+    $config->set('app.key', env('APP_KEY'));
+    $config->set('app.url', env('APP_URL', 'http://localhost'));
+    $config->set('app.name', env('APP_NAME', 'Laravel'));
+    
+    // Logging configuration
+    $config->set('logging.default', env('LOG_CHANNEL', 'stack'));
+    $config->set('logging.channels.stderr', [
+        'driver' => 'monolog',
+        'handler' => Monolog\Handler\StreamHandler::class,
+        'formatter' => env('LOG_STDERR_FORMATTER'),
+        'with' => [
+            'stream' => 'php://stderr',
+        ],
+    ]);
+    
+    return $config;
 });
 
 /*
