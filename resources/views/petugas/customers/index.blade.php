@@ -144,8 +144,8 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-100">
-yan                @forelse($customers as $customer)
-ightnya.                 <tr class="hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 transition-all duration-300 group">
+                @forelse($customers as $customer)
+                 <tr class="hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 transition-all duration-300 group">
                     <td class="px-3 py-3">
                         <div class="flex items-center">
                             <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-full p-1.5 mr-2 flex-shrink-0">
